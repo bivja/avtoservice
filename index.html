@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHIKO — Автосервис</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Playfair Display"', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+      colors: {
+        ink: '#0a0a0a',
+        bone: '#f5f1ea',
+        gold: '#c9a961',
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #0a0a0a; color: #f5f1ea; font-family: 'Inter', sans-serif; }
+  .font-serif { font-family: 'Playfair Display', serif; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .shimmer { animation: shimmer 4s ease-in-out infinite; }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .spin-slow { animation: spin-slow 40s linear infinite; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: #c9a961;
+    transition: width 0.4s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  .photo-mask {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<!-- ==================== NAV ==================== -->
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-ink/70 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+    <a href="#" class="font-serif text-2xl tracking-tight">
+      SHIKO<span class="text-gold">.</span>Автосервис
+    </a>
+    <div class="hidden md:flex items-center gap-10 text-sm font-light">
+      <a href="#services" class="nav-link">Услуги</a>
+      <a href="#about" class="nav-link">О сервисе</a>
+      <a href="#reviews" class="nav-link">Отзывы</a>
+      <a href="#contact" class="nav-link">Контакты</a>
+    </div>
+    <a href="#contact" class="text-xs uppercase tracking-widest border border-gold/40 text-gold px-5 py-2.5 hover:bg-gold hover:text-ink transition-all duration-300">
+      Записаться
+    </a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
+  <div class="absolute -right-40 top-1/4 w-[600px] h-[600px] border border-gold/10 rounded-full spin-slow pointer-events-none"></div>
+  <div class="absolute -right-20 top-1/3 w-[400px] h-[400px] border border-gold/5 rounded-full spin-slow pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-12 gap-12 items-center w-full">
+    <div class="lg:col-span-7 reveal">
+      <p class="text-gold text-xs uppercase tracking-[0.4em] mb-8">Добро пожаловать</p>
+      <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-8">
+        Автосервис,<br>
+        требующий<br>
+        <span class="italic text-gold shimmer">внимания.</span>
+      </h1>
+      <p class="text-bone/60 text-lg font-light max-w-xl mb-12 leading-relaxed">
+        Премиальный автосервис в центре города. Цифровая диагностика, оригинальные запчасти и результат, который виден с первого взгляда.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#contact" class="bg-gold text-ink px-8 py-4 text-sm uppercase tracking-widest hover:bg-bone transition-colors duration-300">
+          Бесплатная консультация
+        </a>
+        <a href="#services" class="border border-white/15 px-8 py-4 text-sm uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300">
+          Наши услуги
+        </a>
+      </div>
+
+      <div class="mt-20 flex gap-12 text-sm">
+        <div>
+          <div class="font-serif text-4xl text-gold">10+</div>
+          <div class="text-bone/40 mt-1 font-light">лет опыта</div>
+        </div>
+        <div>
+          <div class="font-serif text-4xl text-gold">800+</div>
+          <div class="text-bone/40 mt-1 font-light">довольных автовладельцев</div>
+        </div>
+        <div>
+          <div class="font-serif text-4xl text-gold">4.5</div>
+          <div class="text-bone/40 mt-1 font-light">рейтинг сервиса</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 reveal">
+      <div class="relative aspect-[3/4] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80"
+          alt="Автосервис"
+          class="w-full h-full object-cover photo-mask grayscale-[30%]"
+        >
+        <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-ink via-ink/80 to-transparent">
+          <p class="font-serif text-2xl italic mb-2">"Машина должна быть обкатана."</p>
+          <p class="text-bone/50 text-sm font-light">— Философия наших сотрудников</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services" class="py-32 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="reveal mb-20 max-w-2xl">
+      <p class="text-gold text-xs uppercase tracking-[0.4em] mb-6">Услуги</p>
+      <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-4">
+        Полный спектр <span class="italic text-gold">премиального</span> автосервиса.
+      </h2>
+      <p class="text-gold text-xs uppercase tracking-[0.4em]">от лучших специалистов</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-px bg-white/5">
+      <!-- Услуга 1 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">01</div>
+        <h3 class="font-serif text-2xl mb-4">Тюнинг</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Обвесы, диски, выхлопные системы премиум-класса.
+        </p>
+        <p class="text-gold text-sm font-light">от 45 000 ₽</p>
+      </div>
+
+      <!-- Услуга 2 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">02</div>
+        <h3 class="font-serif text-2xl mb-4">Ремень ГРМ</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Замена ремней и роликов ГРМ оригинальными комплектами.
+        </p>
+        <p class="text-gold text-sm font-light">от 3 500 ₽</p>
+      </div>
+
+      <!-- Услуга 3 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">03</div>
+        <h3 class="font-serif text-2xl mb-4">Покраска</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Полная и локальная покраска кузова. Ваше авто будет сиять.
+        </p>
+        <p class="text-gold text-sm font-light">от 10 000 ₽</p>
+      </div>
+
+      <!-- Услуга 4 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">04</div>
+        <h3 class="font-serif text-2xl mb-4">Проверка тормозов</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Замена колодок, дисков и тормозных шлангов.
+        </p>
+        <p class="text-gold text-sm font-light">от 9 999 ₽</p>
+      </div>
+
+      <!-- Услуга 5 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">05</div>
+        <h3 class="font-serif text-2xl mb-4">Кузовной ремонт</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Восстановление геометрии и приведение авто в идеальный вид.
+        </p>
+        <p class="text-gold text-sm font-light">от 80 000 ₽</p>
+      </div>
+
+      <!-- Услуга 6 -->
+      <div class="reveal bg-ink p-10 lg:p-12 group hover:bg-white/[0.02] transition-colors duration-500">
+        <div class="text-gold font-serif text-5xl mb-8 opacity-40 group-hover:opacity-100 transition-opacity">06</div>
+        <h3 class="font-serif text-2xl mb-4">Замена салона</h3>
+        <p class="text-bone/50 font-light leading-relaxed mb-6">
+          Химчистка салона, перетяжка, установка аудиосистем.
+        </p>
+        <p class="text-gold text-sm font-light">от 60 000 ₽</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="py-32 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+    <div class="reveal">
+      <p class="text-gold text-xs uppercase tracking-[0.4em] mb-6">О сервисе</p>
+      <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-8">
+        Сервис, где технологии<br>
+        <span class="italic text-gold">служат результату.</span>
+      </h2>
+      <p class="text-bone/60 font-light leading-relaxed mb-6">
+        Мы создали пространство, где тюнинг перестал быть роскошью и стал заботой о машине. Немецкое оборудование, оригинальные запчасти, цифровая диагностика — всё для того, чтобы результат был безупречен.
+      </p>
+      <p class="text-bone/60 font-light leading-relaxed mb-10">
+        Каждый сотрудник автосервиса проходит стажировки в Европе и работает исключительно в своей специализации. Никаких «универсальных» технарей — только профильные эксперты.
+      </p>
+
+      <div class="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+        <div>
+          <div class="font-serif text-3xl text-gold mb-2">20+</div>
+          <div class="text-bone/40 text-sm font-light">профильных специалистов</div>
+        </div>
+        <div>
+          <div class="font-serif text-3xl text-gold mb-2">3D</div>
+          <div class="text-bone/40 text-sm font-light">диагностика и моделирование</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal relative">
+      <div class="aspect-square overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80"
+          alt="Интерьер сервиса"
+          class="w-full h-full object-cover grayscale-[40%] hover:grayscale-0 transition-all duration-700"
+        >
+      </div>
+      <div class="absolute -bottom-6 -left-6 bg-ink border border-gold/20 p-6 max-w-xs">
+        <p class="font-serif italic text-lg text-gold mb-1">"Тюнинг — это luxury."</p>
+        <p class="text-bone/40 text-xs font-light">— Александр Шубаров, основатель</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEWS ==================== -->
+<section id="reviews" class="py-32 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="reveal mb-20 max-w-2xl">
+      <p class="text-gold text-xs uppercase tracking-[0.4em] mb-6">Отзывы</p>
+      <h2 class="font-serif text-5xl md:text-6xl leading-tight">
+        Голоса довольных <span class="italic text-gold">автовладельцев.</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="reveal border border-white/5 p-8 hover:border-gold/30 transition-colors duration-500">
+        <div class="text-gold text-2xl mb-6 font-serif">★★★★★</div>
+        <p class="text-bone/70 font-light leading-relaxed mb-8 italic font-serif text-lg">
+          "Приехал на диагностику — уехал с планом ремонта. Результат превзошёл ожидания."
+        </p>
+        <div class="text-sm">
+          <div class="text-bone">Анна М.</div>
+          <div class="text-bone/40 font-light">диагностика</div>
+        </div>
+      </div>
+
+      <div class="reveal border border-white/5 p-8 hover:border-gold/30 transition-colors duration-500">
+        <div class="text-gold text-2xl mb-6 font-serif">★★★★★</div>
+        <p class="text-bone/70 font-light leading-relaxed mb-8 italic font-serif text-lg">
+          "Сделали полный тюнинг за два дня. Машина выглядит как с картинки, звук мотора — отдельный кайф."
+        </p>
+        <div class="text-sm">
+          <div class="text-bone">Данил Германток</div>
+          <div class="text-bone/40 font-light">тюнинг</div>
+        </div>
+      </div>
+
+      <div class="reveal border border-white/5 p-8 hover:border-gold/30 transition-colors duration-500">
+        <div class="text-gold text-2xl mb-6 font-serif">★★★★★</div>
+        <p class="text-bone/70 font-light leading-relaxed mb-8 italic font-serif text-lg">
+          "Заезжаем всеми друзьями уже три года. Каждый визит — как в хороший ресторан: сервис, атмосфера, внимание к деталям."
+        </p>
+        <div class="text-sm">
+          <div class="text-bone">Елена В.</div>
+          <div class="text-bone/40 font-light">техническое обслуживание</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="py-32 border-t border-white/5 relative overflow-hidden">
+  <div class="absolute -left-40 bottom-0 w-[500px] h-[500px] border border-gold/5 rounded-full spin-slow pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20">
+    <div class="reveal">
+      <p class="text-gold text-xs uppercase tracking-[0.4em] mb-6">Запись</p>
+      <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-8">
+        Начните с<br>
+        <span class="italic text-gold">бесплатной</span><br>
+        консультации.
+      </h2>
+      <p class="text-bone/60 font-light leading-relaxed mb-10 max-w-md">
+        Оставьте заявку — администратор свяжется с вами в течение 15 минут, подберёт удобное время и ответит на все вопросы.
+      </p>
+
+      <div class="space-y-4 text-sm">
+        <div class="flex gap-4 items-baseline">
+          <span class="text-gold w-20 font-light">Адрес</span>
+          <span class="text-bone/70 font-light">г. Москва, ул. Пречистенка, 15</span>
+        </div>
+        <div class="flex gap-4 items-baseline">
+          <span class="text-gold w-20 font-light">Телефон</span>
+          <span class="text-bone/70 font-light">+7 (495) 423-43-85</span>
+        </div>
+        <div class="flex gap-4 items-baseline">
+          <span class="text-gold w-20 font-light">Часы</span>
+          <span class="text-bone/70 font-light">Ежедневно, 9:00 — 21:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form id="leadForm" class="space-y-6">
+        <div>
+          <label class="block text-xs uppercase tracking-widest text-bone/40 mb-3">Имя</label>
+          <input
+            type="text" name="name" required
+            class="w-full bg-transparent border-b border-white/15 focus:border-gold outline-none py-3 text-bone font-light transition-colors"
+            placeholder="Как к вам обращаться"
+          >
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-widest text-bone/40 mb-3">Телефон</label>
+          <input
+            type="tel" name="phone" required
+            class="w-full bg-transparent border-b border-white/15 focus:border-gold outline-none py-3 text-bone font-light transition-colors"
+            placeholder="+7 (___) ___-__-__"
+          >
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-widest text-bone/40 mb-3">Услуга</label>
+          <select
+            name="service"
+            class="w-full bg-transparent border-b border-white/15 focus:border-gold outline-none py-3 text-bone font-light transition-colors"
+          >
+            <option class="bg-ink">Консультация</option>
+            <option class="bg-ink">Тюнинг</option>
+            <option class="bg-ink">Покраска</option>
+            <option class="bg-ink">Кузовной ремонт</option>
+            <option class="bg-ink">Тех. обслуживание</option>
+            <option class="bg-ink">Другое</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-widest text-bone/40 mb-3">Комментарий</label>
+          <textarea
+            name="message" rows="3"
+            class="w-full bg-transparent border-b border-white/15 focus:border-gold outline-none py-3 text-bone font-light resize-none transition-colors"
+            placeholder="Опишите вопрос, если есть"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-gold text-ink py-4 text-sm uppercase tracking-widest hover:bg-bone transition-colors duration-300"
+        >
+          Отправить заявку
+        </button>
+        <p id="formStatus" class="text-gold text-sm font-light text-center hidden"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="border-t border-white/5 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+    <div class="font-serif text-xl">SHIKO<span class="text-gold">.</span>Автосервис</div>
+    <div class="text-bone/40 font-light">© 2026. Все права защищены.</div>
+    <div class="flex gap-8 text-bone/40 font-light">
+      <a href="#" class="hover:text-gold transition-colors">Telegram</a>
+      <a href="#" class="hover:text-gold transition-colors">WhatsApp</a>
+      <a href="#" class="hover:text-gold transition-colors">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== JS ==================== -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.getElementById('leadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    const btn = this.querySelector('button[type="submit"]');
+
+    btn.textContent = 'Заявка отправлена ✓';
+    btn.classList.add('bg-bone');
+    status.textContent = 'Спасибо! Мы свяжемся с вами в течение 15 минут.';
+    status.classList.remove('hidden');
+
+    setTimeout(() => {
+      this.reset();
+      btn.textContent = 'Отправить заявку';
+      btn.classList.remove('bg-bone');
+      status.classList.add('hidden');
+    }, 4000);
+  });
+</script>
+
+</body>
+</html>
